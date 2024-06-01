@@ -11,7 +11,7 @@
 
   <groupId>io.github.alderan-smile</groupId>
   <artifactId>function_fun</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.3</version>
   <packaging>jar</packaging>
 
   <name>io.github.alderan-smile:function_fun</name>
@@ -91,10 +91,10 @@
       <id>ossrh</id>
       <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
     </snapshotRepository>
-    <!--repository>
+    <repository>
       <id>ossrh</id>
       <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository-->
+    </repository>
   </distributionManagement>
 
   <build>
