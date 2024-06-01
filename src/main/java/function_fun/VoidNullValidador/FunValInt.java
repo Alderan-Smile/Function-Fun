@@ -1,4 +1,4 @@
-package function_fun.VoudNullValidador;
+package function_fun.VoidNullValidador;
 
 /************************************************************************************************************
  * @author Oliver Consterla Araya                                                                           *
@@ -14,7 +14,7 @@ public class FunValInt {
      * @param numero The Integer object to be validated.
      * @return The value of the Integer object if it's not null, or 0 if it is null.
      */
-    public int IntegerValidador(Integer numero){
+    public Integer IntegerValidador(Integer numero){
         if(numero == null){
             return 0;
         }else{
