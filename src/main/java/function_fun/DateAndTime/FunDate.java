@@ -76,7 +76,7 @@ public class FunDate {
      * @param dias the number of days to be added
      * @return the formatted string representing the resulting date
      */
-    public synchronized String DateSuma(String pattern,Date fechaHora, int dias){
+    public synchronized String DateSuma(String pattern, Date fechaHora, int dias){
         SimpleDateFormat parser = new SimpleDateFormat(pattern);
 
         try {
