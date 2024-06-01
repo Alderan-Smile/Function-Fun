@@ -1,4 +1,4 @@
-package function_fun.VoudNullValidador;
+package function_fun.VoidNullValidador;
 
 import java.util.Date;
 

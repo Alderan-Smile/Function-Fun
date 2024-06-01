@@ -1,8 +1,8 @@
 package function_fun.DateAndTime;
 
-import function_fun.VoudNullValidador.FunValDate;
-import function_fun.VoudNullValidador.FunValInt;
-import function_fun.VoudNullValidador.FunValStr;
+import function_fun.VoidNullValidador.FunValDate;
+import function_fun.VoidNullValidador.FunValInt;
+import function_fun.VoidNullValidador.FunValStr;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -211,9 +211,21 @@ public class FunDate {
         return c.getTime();
     }
 
+    /**
+     * Adds the specified number of days, months, years, hours, minutes, and seconds to the given date and returns the result as a formatted string.
+     *
+     * @param pattern The pattern used to format the date.
+     * @param fechaHora The date to which the time units will be added.
+     * @param day The number of days to add.
+     * @param month The number of months to add.
+     * @param year The number of years to add.
+     * @param hour The number of hours to add.
+     * @param minute The number of minutes to add.
+     * @param second The number of seconds to add.
+     * @return A formatted string representing the date after adding the specified time units, or null if an error occurs during formatting.
+     */
     public synchronized String DateSuma(String pattern, Date fechaHora, Integer day, Integer month, Integer year, Integer hour, Integer minute, Integer second){
         SimpleDateFormat parser = new SimpleDateFormat(funValStr.StringValidador(pattern));
-
         try {
             Calendar c = Calendar.getInstance();
             c.setTime(funValDate.DateValidador(fechaHora));
@@ -223,7 +235,6 @@ public class FunDate {
             c.add(Calendar.HOUR_OF_DAY, funValInt.IntegerValidador(hour));
             c.add(Calendar.MINUTE, funValInt.IntegerValidador(minute));
             c.add(Calendar.SECOND, funValInt.IntegerValidador(second));
-
             Date crono = c.getTime();
             return parser.format(crono);
         } catch (Exception e) {
@@ -232,6 +243,18 @@ public class FunDate {
         }
     }
 
+    /**
+     * Adds the specified number of days, months, years, hours, minutes, and seconds to the given date and returns the updated date.
+     *
+     * @param fechaHora The date to which the time units will be added.
+     * @param day The number of days to add.
+     * @param month The number of months to add.
+     * @param year The number of years to add.
+     * @param hour The number of hours to add.
+     * @param minute The number of minutes to add.
+     * @param second The number of seconds to add.
+     * @return The updated date after adding the specified time units.
+     */
     public synchronized Date DateSuma(Date fechaHora, Integer day, Integer month, Integer year, Integer hour, Integer minute, Integer second){
         Calendar c = Calendar.getInstance();
         c.setTime(fechaHora);
