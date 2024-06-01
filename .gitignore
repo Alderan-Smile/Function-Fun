@@ -34,5 +34,8 @@ build/
 ### VS Code ###
 .vscode/
 
+### Github CODE ###
+.github/
+
 ### Mac OS ###
 .DS_Store
