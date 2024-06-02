@@ -8,10 +8,6 @@ import java.math.BigInteger;
  * @version 202461.12.19                                                                                    *
  * @since 2024                                                                                              *
  ************************************************************************************************************/
-/**
- * This class contains methods for validating BigDecimal and BigInteger objects.
- * It provides methods to check if these objects are null and returns their value if they're not null, or zero if they are null.
- */
 public class FunValBigs {
 
     /**

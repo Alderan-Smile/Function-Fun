@@ -5,10 +5,6 @@ package function_fun.VoidNullValidador;
  * @version 202461.12.13                                                                                    *
  * @since 2024                                                                                              *
  ************************************************************************************************************/
-/**
- * This class contains methods for validating Long objects.
- * It provides a method to check if a Long object is null and returns its value if it's not null, or 0L if it is null.
- */
 public class FunValLong {
 
     /**

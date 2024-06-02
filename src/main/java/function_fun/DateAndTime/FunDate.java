@@ -17,11 +17,6 @@ import java.util.Date;
  * @version 2024531.19.31                                                                                   *
  * @since 2024                                                                                              *
  ************************************************************************************************************/
-/**
- * This class contains methods for manipulating and formatting Date objects.
- * It provides methods to convert a string to a Date object and vice versa, add specific amounts of time to a date,
- * and validate a Date object. It uses the FunValDate, FunValInt, and FunValStr classes for validation purposes.
- */
 public class FunDate {
 
     private static final Logger log = LogManager.getLogger(FunDate.class);

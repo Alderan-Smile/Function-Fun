@@ -11,11 +11,6 @@ import java.util.Date;
  * @version 202461.23.24                                                                                    *
  * @since 2024                                                                                              *
  ************************************************************************************************************/
-/**
- * This class contains methods for validating the difference in days between two dates.
- * It provides methods for both Date and String inputs.
- * The validation checks if the difference is less than or equal to a maximum number of days, or greater than or equal to a minimum number of days.
- */
 public class FunValMMEDate {
 
     private static final Logger log = LogManager.getLogger(FunValMMEDate.class);
