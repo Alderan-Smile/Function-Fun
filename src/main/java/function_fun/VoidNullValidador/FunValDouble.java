@@ -5,7 +5,10 @@ package function_fun.VoidNullValidador;
  * @version 202461.12.15                                                                                    *
  * @since 2024                                                                                              *
  ************************************************************************************************************/
-
+/**
+ * This class contains methods for validating Double objects.
+ * It provides a method to check if a Double object is null and returns its value if it's not null, or 0.0 if it is null.
+ */
 public class FunValDouble {
 
     /**
