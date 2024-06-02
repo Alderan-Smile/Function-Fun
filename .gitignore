@@ -33,6 +33,8 @@ build/
 
 ### Github CODE ###
 .github/
+.github/workflows/
+.github/workflows/*.yml
 
 ### VS Code ###
 .vscode/
