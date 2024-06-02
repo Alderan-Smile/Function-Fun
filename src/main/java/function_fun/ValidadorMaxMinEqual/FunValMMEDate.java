@@ -22,7 +22,6 @@ public class FunValMMEDate {
      * @param fechaFin The final date.
      * @param diasMax The maximum number of days allowed between the initial and final date.
      * @return true if the difference in days is less than or equal to the maximum, false otherwise.
-     * @throws Exception if there is an error calculating the difference in days.
      */
     public boolean valFechaMax(Date fechaIni, Date fechaFin, Integer diasMax){
 
@@ -49,7 +48,6 @@ public class FunValMMEDate {
      * @param pattern The pattern used for date parsing.
      * @param diasMax The maximum number of days allowed between the initial and final date.
      * @return true if the difference in days is less than or equal to the maximum, false otherwise.
-     * @throws Exception if there is an error parsing the dates or calculating the difference in days.
      */
     public boolean valFechaMax(String fechaIni, String fechaFin, String pattern, Integer diasMax){
 
@@ -84,7 +82,6 @@ public class FunValMMEDate {
      * @param fechaFin The final date.
      * @param diasMin The minimum number of days required between the initial and final date.
      * @return true if the difference in days is greater than or equal to the minimum, false otherwise.
-     * @throws Exception if there is an error calculating the difference in days.
      */
     public boolean valFechaMin(Date fechaIni, Date fechaFin, Integer diasMin){
 
@@ -111,7 +108,6 @@ public class FunValMMEDate {
      * @param pattern The pattern used for date parsing.
      * @param diasMin The minimum number of days required between the initial and final date.
      * @return true if the difference in days is greater than or equal to the minimum, false otherwise.
-     * @throws Exception if there is an error parsing the dates or calculating the difference in days.
      */
     public boolean valFechaMin(String fechaIni, String fechaFin, String pattern, Integer diasMin){
 
@@ -145,7 +141,6 @@ public class FunValMMEDate {
      * @param fechaIni The initial date.
      * @param fechaFin The final date.
      * @return true if the difference in days is equal to zero (i.e., the dates are equal), false otherwise.
-     * @throws Exception if there is an error calculating the difference in days.
      */
     public boolean valFechaEqual(Date fechaIni, Date fechaFin){
         try {
@@ -169,7 +164,6 @@ public class FunValMMEDate {
      * @param fechaFin The final date as a string.
      * @param pattern The pattern used for date parsing.
      * @return true if the difference in days is equal to zero (i.e., the dates are equal), false otherwise.
-     * @throws Exception if there is an error parsing the dates or calculating the difference in days.
      */
     public boolean valFechaEqual(String fechaIni, String fechaFin, String pattern){
         try {
