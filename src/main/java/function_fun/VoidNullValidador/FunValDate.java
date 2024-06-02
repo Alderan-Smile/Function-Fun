@@ -7,10 +7,6 @@ import java.util.Date;
  * @version 202461.0.5                                                                                      *
  * @since 2024                                                                                              *
  ************************************************************************************************************/
-/**
- * This class contains methods for validating Date objects.
- * It provides a method to check if a Date object is null and returns its value if it's not null, or a new Date object if it is null.
- */
 public class FunValDate {
 
     /**

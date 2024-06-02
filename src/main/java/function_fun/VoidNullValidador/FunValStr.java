@@ -5,10 +5,6 @@ package function_fun.VoidNullValidador;
  * @version 202461.0.1                                                                                      *
  * @since 2024                                                                                              *
  ************************************************************************************************************/
-/**
- * This class contains methods for validating String objects.
- * It provides a method to check if a String object is null and returns its value if it's not null, or an empty string if it is null.
- */
 public class FunValStr {
 
     /**
