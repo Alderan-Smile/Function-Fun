@@ -1,5 +1,7 @@
 package function_fun.OtherFun;
 
+import java.util.Random;
+
 /************************************************************************************************************
  * @author Oliver Consterla Araya                                                                           *
  * @version 202461.23.24                                                                                    *
