@@ -1,5 +1,6 @@
 package function_fun.OtherFun;
 
+import java.util.List;
 import java.util.Random;
 
 /************************************************************************************************************
@@ -43,5 +44,28 @@ public class FunRandomizer {
     public Double randomDou(Double min, Double max){
         Random random = new Random();
         return min + (random.nextDouble() * (max - min));
+    }
+
+    /**
+     * Selects a random element from the provided list.
+     *
+     * @param <T> the type of elements in the list
+     * @param list the list from which to select a random element
+     * @return a randomly selected element from the list, or null if the list is empty
+     */
+    public <T> T selectRandom(List<T> list) {
+        // Create a new Random instance
+        Random random = new Random();
+
+        // If the list is empty, return null
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        // Generate a random index within the bounds of the list size
+        int index = random.nextInt(list.size());
+
+        // Return the element at the randomly generated index
+        return list.get(index);
     }
 }
