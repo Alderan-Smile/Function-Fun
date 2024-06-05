@@ -1,5 +1,7 @@
 package function_fun.OtherFun;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Random;
 
@@ -20,6 +22,30 @@ public class FunRandomizer {
     public Integer randomInt(Integer min, Integer max){
         Random random = new Random();
         return random.nextInt(max - min + 1) + min;
+    }
+
+    /**
+     * Generates a random BigDecimal value between the specified minimum and maximum values.
+     *
+     * @param min the minimum value (inclusive)
+     * @param max the maximum value (exclusive)
+     * @return a random BigDecimal value between min (inclusive) and max (exclusive)
+     */
+    public BigDecimal randomBigDec(BigDecimal min, BigDecimal max){
+        Random random = new Random();
+        return min.add(new BigDecimal(random.nextDouble()).multiply(max.subtract(min)));
+    }
+
+    /**
+     * Generates a random BigInteger value between the specified minimum and maximum values (inclusive).
+     *
+     * @param min the minimum value (inclusive)
+     * @param max the maximum value (inclusive)
+     * @return a random BigInteger value between min and max
+     */
+    public BigInteger randomBigInt(BigInteger min, BigInteger max){
+        Random random = new Random();
+        return min.add(new BigInteger(max.subtract(min).bitLength(), random));
     }
 
     /**
