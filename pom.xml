@@ -11,7 +11,7 @@
 
   <groupId>io.github.alderan-smile</groupId>
   <artifactId>function_fun</artifactId>
-  <version>0.0.9</version>
+  <version>0.1.0</version>
   <packaging>jar</packaging>
 
   <name>io.github.alderan-smile:function_fun</name>
@@ -87,12 +87,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jdbc</artifactId>
-      <version>2.7.5</version>
+      <version>3.2.5</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jdbc</artifactId>
-      <version>2.7.5</version>
+      <version>3.2.5</version>
     </dependency>
 
   </dependencies>
