@@ -52,10 +52,11 @@ public class FunJdbcSpringSaveImpl implements FunJdbcSpringSave {
      * @param <T> This is the type of the main object to be saved.
      * @param <R> This is the type of the related object to be saved.
      * @param obj This is the main object to be saved.
-     * @param obj2 This is the related object to be saved.
      */
     @Override
-    public <T,R> void save(T obj, R obj2){
+    public <T,R> void save(T obj){
+        R obj2 = getPrimaryKey(obj);
+
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
 
         Map<String, Object> paramMap = new HashMap<>();
@@ -143,14 +144,12 @@ public class FunJdbcSpringSaveImpl implements FunJdbcSpringSave {
      * and then saves the object and its related object using the save method.
      *
      * @param <T> This is the type of the objects in the list to be saved.
-     * @param <R> This is the type of the related objects to be saved.
      * @param list This is the list of objects to be saved.
      */
     @Override
-    public <T,R> void saveAll(List<T> list){
+    public <T> void saveAll(List<T> list){
         for (T obj : list) {
-            R obj2 = getPrimaryKey(obj);
-            save(obj, obj2);
+            save(obj);
         }
     }
 
