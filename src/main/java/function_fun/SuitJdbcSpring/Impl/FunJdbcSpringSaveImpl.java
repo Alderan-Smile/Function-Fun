@@ -73,6 +73,16 @@ public class FunJdbcSpringSaveImpl implements FunJdbcSpringSave {
             }
         }
 
+        Field[] fields3 = obj2.getClass().getDeclaredFields();
+        for (Field field : fields3) {
+            ColumnName annotation = field.getAnnotation(ColumnName.class);
+            if (annotation != null) {
+                String columnName = annotation.value();
+                columnNames.append(columnName).append(", ");
+                columnValues.append(":").append(field.getName()).append(", ");
+            }
+        }
+
         String insertSql = "INSERT INTO " + tableName + " ("
                 + columnNames.substring(0, columnNames.length() - 2) + ") VALUES ("
                 + columnValues.substring(0, columnValues.length() - 2) + ")";
