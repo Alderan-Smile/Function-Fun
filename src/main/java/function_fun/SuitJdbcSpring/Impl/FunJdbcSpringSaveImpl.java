@@ -1,23 +1,26 @@
 package function_fun.SuitJdbcSpring.Impl;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.dao.DuplicateKeyException;
 
 import function_fun.SuitJdbcSpring.FunJdbcSpringSave;
 import function_fun.SuitJdbcSpring.AnnotationsJdbcSpring.ColumnName;
 import function_fun.SuitJdbcSpring.AnnotationsJdbcSpring.PrimaryKey;
 import function_fun.SuitJdbcSpring.AnnotationsJdbcSpring.TableName;
+import lombok.extern.slf4j.Slf4j;
 
 /************************************************************************************************************
  * @author Oliver Consterla Araya                                                                           *
  * @version 202467.0.44                                                                                     *
  * @since 2024                                                                                              *
  ************************************************************************************************************/
+@Slf4j
 public class FunJdbcSpringSaveImpl implements FunJdbcSpringSave {
 
     /**
@@ -38,7 +41,7 @@ public class FunJdbcSpringSaveImpl implements FunJdbcSpringSave {
     /**
      * This method is used to save an object and its related object into the database.
      * It first creates a NamedParameterJdbcTemplate from the existing JdbcTemplate.
-     * Then it creates a BeanPropertySqlParameterSource from the object to be saved.
+     * Then it creates a MapSqlParameterSource from the object to be saved.
      * It retrieves the table name from the TableName annotation of the object's class.
      * It then builds the column names and values for the SQL statements from the ColumnName annotations of the object's fields.
      * It creates an INSERT SQL statement and an UPDATE SQL statement.
@@ -55,7 +58,40 @@ public class FunJdbcSpringSaveImpl implements FunJdbcSpringSave {
     public <T,R> void save(T obj, R obj2){
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
 
-        BeanPropertySqlParameterSource beanPropertySqlParameterSource = new BeanPropertySqlParameterSource(obj);
+        Map<String, Object> paramMap = new HashMap<>();
+        Map<String, Object> paramMap2 = new HashMap<>();
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            ColumnName annotation = field.getAnnotation(ColumnName.class);
+            if (annotation != null) {
+                String columnName = annotation.value();
+                field.setAccessible(true);
+                try {
+                    Object value = field.get(obj);
+                    paramMap.put(columnName, value);
+                    paramMap2.put(columnName, value);
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException("Error al obtener el valor del campo: " + e.getMessage());
+                }
+            }
+        }
+
+        Field[] fields2 = obj2.getClass().getDeclaredFields();
+        for (Field field : fields2) {
+            ColumnName annotation = field.getAnnotation(ColumnName.class);
+            if (annotation != null) {
+                String columnName = annotation.value();
+                field.setAccessible(true);
+                try {
+                    Object value = field.get(obj2);
+                    paramMap.put(columnName, value);
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException("Error al obtener el valor del campo: " + e.getMessage());
+                }
+            }
+        }
+
+        log.debug("Parametros completos\n{}\nSin PK\n{}",paramMap,paramMap2);
 
         TableName tableNameAnnotation = obj.getClass().getAnnotation(TableName.class);
         String tableName = tableNameAnnotation.value();
@@ -63,24 +99,9 @@ public class FunJdbcSpringSaveImpl implements FunJdbcSpringSave {
         StringBuilder columnNames = new StringBuilder();
         StringBuilder columnValues = new StringBuilder();
 
-        Field[] fields = obj.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            ColumnName annotation = field.getAnnotation(ColumnName.class);
-            if (annotation != null) {
-                String columnName = annotation.value();
-                columnNames.append(columnName).append(", ");
-                columnValues.append(":").append(field.getName()).append(", ");
-            }
-        }
-
-        Field[] fields3 = obj2.getClass().getDeclaredFields();
-        for (Field field : fields3) {
-            ColumnName annotation = field.getAnnotation(ColumnName.class);
-            if (annotation != null) {
-                String columnName = annotation.value();
-                columnNames.append(columnName).append(", ");
-                columnValues.append(":").append(field.getName()).append(", ");
-            }
+        for (String columnName : paramMap.keySet()) {
+            columnNames.append(columnName).append(", ");
+            columnValues.append(":").append(columnName).append(", ");
         }
 
         String insertSql = "INSERT INTO " + tableName + " ("
@@ -88,15 +109,10 @@ public class FunJdbcSpringSaveImpl implements FunJdbcSpringSave {
                 + columnValues.substring(0, columnValues.length() - 2) + ")";
 
         String updateSql = "UPDATE " + tableName + " SET ";
-        for (Field field : fields) {
-            ColumnName annotation = field.getAnnotation(ColumnName.class);
-            if (annotation != null) {
-                String columnName = annotation.value();
-                updateSql += columnName + " = :" + field.getName() + ", ";
-            }
+        for (String columnName : paramMap2.keySet()) {
+            updateSql += columnName + " = :" + columnName + ", ";
         }
 
-        Field[] fields2 = obj2.getClass().getDeclaredFields();
         int fieldCount = fields2.length;
         updateSql = updateSql.substring(0, updateSql.length() - 2) + " WHERE ";
         for (int i = 0; i < fieldCount; i++) {
@@ -104,20 +120,23 @@ public class FunJdbcSpringSaveImpl implements FunJdbcSpringSave {
             ColumnName annotation = field.getAnnotation(ColumnName.class);
             if (annotation != null) {
                 String columnName = annotation.value();
-                updateSql += columnName + " = :" + field.getName();
+                updateSql += columnName + " = :" + columnName;
                 if (i < fieldCount - 1) {
                     updateSql += " AND ";
                 }
             }
         }
 
+        log.debug("Querys armadas \n{} \n{}",updateSql,insertSql);
+
         try {
-            namedParameterJdbcTemplate.update(updateSql, beanPropertySqlParameterSource);
-        } catch (EmptyResultDataAccessException e) {
-            namedParameterJdbcTemplate.update(insertSql, beanPropertySqlParameterSource);
+            log.debug("Ejecutando query \n{}",insertSql);
+            namedParameterJdbcTemplate.update(insertSql, paramMap);
+        } catch (DuplicateKeyException e) {
+            log.debug("Ejecutando query \n{}",updateSql);
+            namedParameterJdbcTemplate.update(updateSql, paramMap);
         }
     }
-
     /**
      * This method is used to save a list of objects and their related objects into the database.
      * It iterates over each object in the list, retrieves its primary key using the getPrimaryKey method,
