@@ -15,7 +15,7 @@ public class FunValStr {
      */
     public String StringValidador(String texto){
         if(texto == null){
-            return "";
+            return " ";
         }else{
             return texto;
         }

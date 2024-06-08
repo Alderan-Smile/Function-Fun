@@ -1,4 +1,4 @@
-package function_fun.AnnotationsJdbcSpring;
+package function_fun.SuitJdbcSpring.AnnotationsJdbcSpring;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

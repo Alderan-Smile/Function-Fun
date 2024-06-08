@@ -11,7 +11,7 @@
 
   <groupId>io.github.alderan-smile</groupId>
   <artifactId>function_fun</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <packaging>jar</packaging>
 
   <name>io.github.alderan-smile:function_fun</name>

@@ -29,7 +29,7 @@ public class FunValMMEDate {
             long diferencia = fechaFin.getTime() - fechaIni.getTime();
             long dias = diferencia / (1000 * 60 * 60 * 24);
 
-            if (dias >= diasMax) {
+            if (dias > diasMax) {
                 return false;
             } else {
                 return true;
@@ -64,7 +64,7 @@ public class FunValMMEDate {
             long diferencia = fechaF.getTime() - fechaI.getTime();
             long dias = diferencia / (1000 * 60 * 60 * 24);
 
-            if (dias >= diasMax) {
+            if (dias > diasMax) {
                 return false;
             } else {
                 return true;
@@ -89,7 +89,7 @@ public class FunValMMEDate {
             long diferencia = fechaFin.getTime() - fechaIni.getTime();
             long dias = diferencia / (1000 * 60 * 60 * 24);
 
-            if (dias <= diasMin) {
+            if (dias < diasMin) {
                 return false;
             } else {
                 return true;
@@ -124,7 +124,7 @@ public class FunValMMEDate {
             long diferencia = fechaF.getTime() - fechaI.getTime();
             long dias = diferencia / (1000 * 60 * 60 * 24);
 
-            if (dias <= diasMin) {
+            if (dias < diasMin) {
                 return false;
             } else {
                 return true;

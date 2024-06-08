@@ -1,4 +1,4 @@
-package function_fun.OtherFun;
+package function_fun.SuitJdbcSpring;
 
 import java.util.List;
 
