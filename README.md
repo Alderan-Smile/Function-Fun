@@ -8,7 +8,7 @@ Primero se debe agregar la dependencia al pom.xml
     <dependency>
         <groupId>io.github.alderan-smile</groupId>
         <artifactId>function_fun</artifactId>
-        <version>0.1.1</version>
+        <version>0.1.2</version>
     </dependency>
 
 Luego se debe importar la clase `FunctionFun` y se podrá usar las funciones que se encuentran en ella declarándola.
