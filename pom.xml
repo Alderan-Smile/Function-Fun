@@ -92,7 +92,7 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jdbc</artifactId>
-      <version>3.3.0</version>
+      <version>3.3.7</version>
     </dependency>
 
   </dependencies>
